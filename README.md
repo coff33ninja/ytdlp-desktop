@@ -123,6 +123,40 @@ ytdlp-desktop/
 - [go-ytdlp](https://github.com/lrstanley/go-ytdlp) v1.3.5 — Go-native yt-dlp bindings
 - [Zig](https://ziglang.org/) — C compiler for CGo static linking
 
+## What's Next
+
+High-signal improvements I'd want as a daily-driver:
+
+**Playlist & Channel Support** — right now it's single-video only. Batch-download entire playlists/channels with per-video progress, or queue them as groups that resolve individually.
+
+**Search & Browse** — search YouTube (or any yt-dlp source) from inside the app, preview results, pick what to download without leaving the window.
+
+**Notifications** — toast/banner when a download finishes so you're not staring at progress bars. System tray integration with download count badge.
+
+**Open after download** — one-click "Open File" / "Show in Folder" on completed items. The history shows it finished, but getting to the file requires manual navigation.
+
+**Retry & Resume** — failed downloads should have a Retry button. Paused state is defined in the model but unused — wire it up so you can pause/resume active downloads.
+
+**Queue reordering** — drag or move items up/down in the queue. Currently it's first-in-first-out with no way to prioritize.
+
+**Clipboard monitoring** — optional background watch for copied URLs. Auto-detect and prompt, or just queue silently based on a hotkey.
+
+**Rate limit per download** — the preset has a `limit_rate` field but it's never wired into the downloader flags. Same for cookies/auth headers for private videos.
+
+**SponsorBlock, chapters, subtitles language picker** — deep yt-dlp integrations that power users expect.
+
+**History search & filtering** — searching 50 entries by title/URL. Also: history export/import as JSON/CSV.
+
+**Theme switching without restart** — Settings has a theme toggle but it doesn't hot-reload for the Fyne theme. Smooth the experience.
+
+**Periodic yt-dlp update check** — go-ytdlp auto-installs on first run, but never checks for updates. Badge in the UI when a new yt-dlp is available.
+
+**Format builder polish** — file size estimates from probed data, better codec descriptions, audio-only vs video-only toggle at the top level (not hidden in extract-audio).
+
+**Multi-language subtitle batch download** — currently hardcoded to `en,en.*`. Let users pick languages per-download or per-preset.
+
+**Portable mode** — `%APPDATA%` config is great for installed apps; a `--portable` flag storing config next to the EXE would make USB-stick use seamless.
+
 ## License
 
 MIT
