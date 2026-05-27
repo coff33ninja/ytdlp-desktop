@@ -17,3 +17,4 @@ Desktop.ini
 vendor/
 *.test
 *.test.exe
+*.syso

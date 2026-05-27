@@ -38,14 +38,31 @@ A native Windows desktop frontend for [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 
 ## Build from source
 
-Requires [Go 1.26+](https://go.dev/dl/) and [Zig](https://ziglang.org/download/) for CGo cross-compilation.
+### Prerequisites
+
+- [Go 1.26+](https://go.dev/dl/)
+- [Zig](https://ziglang.org/download/) — C compiler for CGo static linking
+- (Optional) [rsrc](https://github.com/akavel/rsrc) — for embedding EXE icon: `go install github.com/akavel/rsrc@latest`
+
+### Quick build
 
 ```powershell
+.\build.ps1
+```
+
+Generates icon variants, embeds the EXE icon, and compiles a standalone EXE.
+
+### Manual build
+
+```powershell
+go run ./logo/generate.go                          # generate icons
+rsrc -ico logo/app.ico -o app.syso                 # embed icon (optional)
 $env:CC = "zig cc -target x86_64-windows-gnu"
-go build -ldflags="-H windowsgui" -o ytdlp-desktop.exe .
+go build -ldflags="-s -w -H windowsgui" -o ytdlp-desktop.exe .
 ```
 
 - `-H windowsgui` suppresses the terminal window on launch
+- `-s -w` strips debug info for a smaller binary
 - Output: ~44 MB standalone `ytdlp-desktop.exe`
 
 On first run, [go-ytdlp](https://github.com/lrstanley/go-ytdlp) auto-downloads and caches the yt-dlp binary internally.
@@ -55,8 +72,13 @@ On first run, [go-ytdlp](https://github.com/lrstanley/go-ytdlp) auto-downloads a
 ```
 ytdlp-desktop/
 ├── main.go                          # Entry point, window, compact widget
+├── build.ps1                        # Build script (icons + compile)
 ├── logo/
-│   └── logo.png                     # App logo
+│   ├── logo.png                     # Source logo (512x512)
+│   ├── generate.go                  # Icon variant generator (go run)
+│   ├── app.ico                      # Windows EXE icon
+│   ├── logo.svg                     # SVG placeholder
+│   └── icon_*.png                   # Pre-generated PNG sizes (16-256)
 ├── ui/
 │   ├── app.go                       # Controller: tabs, drop handling, probe, queue
 │   ├── drop_zone.go                 # URL entry, download/probe buttons, preset selector
