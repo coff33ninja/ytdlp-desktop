@@ -1,10 +1,10 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="logo.png">
-  <source media="(prefers-color-scheme: light)" srcset="logo.png">
-  <img alt="ytdlp-desktop" src="logo.png" width="320">
-</picture>
-
 # ytdlp-desktop
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="logo/logo.png">
+  <source media="(prefers-color-scheme: light)" srcset="logo/logo.png">
+  <img alt="ytdlp-desktop" src="logo/logo.png" width="96" align="right">
+</picture>
 
 A native Windows desktop frontend for [yt-dlp](https://github.com/yt-dlp/yt-dlp). Single static ~44 MB EXE, no Python runtime, no Web UI — just a clean Fyne-based GUI.
 
@@ -55,7 +55,8 @@ On first run, [go-ytdlp](https://github.com/lrstanley/go-ytdlp) auto-downloads a
 ```
 ytdlp-desktop/
 ├── main.go                          # Entry point, window, compact widget
-├── logo.png                         # App logo
+├── logo/
+│   └── logo.png                     # App logo
 ├── ui/
 │   ├── app.go                       # Controller: tabs, drop handling, probe, queue
 │   ├── drop_zone.go                 # URL entry, download/probe buttons, preset selector
