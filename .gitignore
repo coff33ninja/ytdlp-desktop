@@ -1,0 +1,19 @@
+# Binary
+ytdlp-desktop.exe
+*.exe
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Go
+vendor/
+*.test
+*.test.exe
