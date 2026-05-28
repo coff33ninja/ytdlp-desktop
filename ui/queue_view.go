@@ -137,15 +137,18 @@ func (qv *QueueView) ProcessUpdate(up queue.Update) {
 		if up.Item == nil {
 			return
 		}
-		qv.mu.RLock()
+		qv.mu.Lock()
 		idx := qv.indexOf(up.Item.ID)
-		qv.mu.RUnlock()
-		if idx < 0 {
-			return
+		if idx >= 0 {
+			clone := *up.Item
+			qv.items[idx] = &clone
 		}
-		fyne.Do(func() {
-			qv.listWidget.RefreshItem(idx)
-		})
+		qv.mu.Unlock()
+		if idx >= 0 {
+			fyne.Do(func() {
+				qv.listWidget.RefreshItem(idx)
+			})
+		}
 	}
 }
 

@@ -187,23 +187,8 @@ func (fb *FormatBuilder) buildFormatString() string {
 	audio := fb.audioSelect.Selected
 
 	heightFilter := ""
-	switch {
-	case strings.HasPrefix(res, "2160"):
-		heightFilter = "[height<=2160]"
-	case strings.HasPrefix(res, "1440"):
-		heightFilter = "[height<=1440]"
-	case strings.HasPrefix(res, "1080"):
-		heightFilter = "[height<=1080]"
-	case strings.HasPrefix(res, "720"):
-		heightFilter = "[height<=720]"
-	case strings.HasPrefix(res, "480"):
-		heightFilter = "[height<=480]"
-	case strings.HasPrefix(res, "360"):
-		heightFilter = "[height<=360]"
-	case strings.HasPrefix(res, "240"):
-		heightFilter = "[height<=240]"
-	case strings.HasPrefix(res, "144"):
-		heightFilter = "[height<=144]"
+	if h := parseResolution(FormatBuilderData{Resolution: res}); h < 99999 {
+		heightFilter = fmt.Sprintf("[height<=%d]", h)
 	}
 
 	codecFilter := ""

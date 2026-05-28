@@ -78,9 +78,24 @@ func (ps *PresetSelector) SetProbedFormats(formats []models.FormatInfo) {
 		if codec == "none" || codec == "" {
 			codec = f.ACodec
 		}
+		extra := ""
+		if f.Filesize > 0 {
+			extra = formatFileSize(f.Filesize)
+		} else if f.FilesizeApprox > 0 {
+			extra = "~" + formatFileSize(f.FilesizeApprox)
+		}
+		if f.TBR > 0 {
+			if extra != "" {
+				extra += " "
+			}
+			extra += formatBitrate(f.TBR)
+		}
 		name := fmt.Sprintf("%s #%s %s %s", resLine, f.FormatID, codec, f.Ext)
-		if len(name) > 48 {
-			name = name[:48]
+		if extra != "" {
+			name += " (" + extra + ")"
+		}
+		if len(name) > 60 {
+			name = name[:60]
 		}
 		probed = append(probed, models.Preset{
 			ID:     "probed:" + f.FormatID,
