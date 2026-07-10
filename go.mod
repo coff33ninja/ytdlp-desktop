@@ -5,6 +5,7 @@ go 1.26.3
 require (
 	fyne.io/fyne/v2 v2.7.4
 	github.com/lrstanley/go-ytdlp v1.3.5
+	golang.org/x/image v0.41.0
 )
 
 require (
@@ -40,10 +41,9 @@ require (
 	github.com/stretchr/testify v1.11.1 // indirect
 	github.com/ulikunitz/xz v0.5.15 // indirect
 	github.com/yuin/goldmark v1.7.8 // indirect
-	golang.org/x/crypto v0.48.0 // indirect
-	golang.org/x/image v0.41.0 // indirect
-	golang.org/x/net v0.49.0 // indirect
-	golang.org/x/sys v0.41.0 // indirect
+	golang.org/x/crypto v0.52.0 // indirect
+	golang.org/x/net v0.54.0 // indirect
+	golang.org/x/sys v0.45.0 // indirect
 	golang.org/x/text v0.37.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
